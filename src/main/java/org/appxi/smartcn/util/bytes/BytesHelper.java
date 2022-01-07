@@ -1,6 +1,6 @@
-package org.appxi.hanlp.util.bytes;
+package org.appxi.smartcn.util.bytes;
 
-import org.appxi.hanlp.util.HanlpHelper;
+import org.appxi.smartcn.util.SmartCNHelper;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -39,7 +39,7 @@ public interface BytesHelper {
     }
 
     static ByteArrayStream createByteArrayStream(String path) {
-        return createByteArrayStream(HanlpHelper.resolveData(path));
+        return createByteArrayStream(SmartCNHelper.resolveData(path));
     }
 
     static ByteArrayStream createByteArrayStream(Path file) {

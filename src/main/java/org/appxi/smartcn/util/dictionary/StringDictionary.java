@@ -9,10 +9,10 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
-package org.appxi.hanlp.util.dictionary;
+package org.appxi.smartcn.util.dictionary;
 
 
-import org.appxi.hanlp.util.trie.BinTrie;
+import org.appxi.smartcn.util.trie.BinTrie;
 
 import java.io.BufferedWriter;
 import java.nio.charset.StandardCharsets;
@@ -20,7 +20,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Map;
 
-import static org.appxi.hanlp.util.HanlpHelper.LOG;
+import static org.appxi.smartcn.util.SmartCNHelper.logger;
 
 /**
  * 满足 key=value 格式的词典，其中“=”可以自定义
@@ -63,7 +63,7 @@ public class StringDictionary extends SimpleDictionary<String> {
                 bw.newLine();
             }
         } catch (Exception e) {
-            LOG.warning("保存词典到" + path + "失败");
+            logger.warn("保存词典到" + path + "失败", e);
             return true;
         }
         return false;

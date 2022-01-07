@@ -9,9 +9,9 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
-package org.appxi.hanlp.util.dictionary;
+package org.appxi.smartcn.util.dictionary;
 
-import org.appxi.hanlp.util.trie.BinTrie;
+import org.appxi.smartcn.util.trie.BinTrie;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -20,6 +20,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.BiConsumer;
+
+import static org.appxi.smartcn.util.SmartCNHelper.logger;
 
 /**
  * 可以调整大小的词典
@@ -33,11 +35,9 @@ public abstract class SimpleDictionary<V> {
         if (null == stream) return false;
         try (BufferedReader br = new BufferedReader(new InputStreamReader(stream, StandardCharsets.UTF_8))) {
             String line;
-            while ((line = br.readLine()) != null) {
-                parseLineIntoTrie(line, trie);
-            }
+            while ((line = br.readLine()) != null) parseLineIntoTrie(line, trie);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.warn("load stream failed", e);
             return false;
         }
         return true;

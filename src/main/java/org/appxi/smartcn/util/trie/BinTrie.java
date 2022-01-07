@@ -9,11 +9,11 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
-package org.appxi.hanlp.util.trie;
+package org.appxi.smartcn.util.trie;
 
-import org.appxi.hanlp.util.RawArray;
-import org.appxi.hanlp.util.bytes.ByteArray;
-import org.appxi.hanlp.util.bytes.BytesHelper;
+import org.appxi.smartcn.util.bytes.ByteArray;
+import org.appxi.smartcn.util.bytes.BytesHelper;
+import org.appxi.smartcn.util.RawArray;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -21,7 +21,7 @@ import java.nio.file.Path;
 import java.util.*;
 import java.util.function.BiConsumer;
 
-import static org.appxi.hanlp.util.HanlpHelper.LOG;
+import static org.appxi.smartcn.util.SmartCNHelper.logger;
 
 /**
  * 首字直接分配内存，之后二分动态数组的Trie树，能够平衡时间和空间
@@ -284,7 +284,7 @@ public class BinTrie<V> extends BinTrieNode<V> implements Trie<V>, Externalizabl
                 }
             }
         } catch (Exception e) {
-            LOG.warning("保存到" + path + "失败" + e);
+            logger.warn("保存到" + path + "失败", e);
             return false;
         }
 
@@ -316,7 +316,7 @@ public class BinTrie<V> extends BinTrieNode<V> implements Trie<V>, Externalizabl
                 }
             }
         } catch (Exception e) {
-            LOG.warning("保存到" + out + "失败" + e);
+            logger.warn("保存到" + out + "失败", e);
             return false;
         }
 

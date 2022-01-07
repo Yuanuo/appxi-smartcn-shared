@@ -8,16 +8,14 @@
  * Copyright (c) 2003-2015, hankcs. All Right Reserved, http://www.hankcs.com/
  * </copyright>
  */
-package org.appxi.hanlp.util.bytes;
-
-import org.appxi.util.StringHelper;
+package org.appxi.smartcn.util.bytes;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 
-import static org.appxi.hanlp.util.HanlpHelper.LOG;
+import static org.appxi.smartcn.util.SmartCNHelper.logger;
 
 /**
  * 流式的字节数组，降低读取时的内存峰值
@@ -37,7 +35,7 @@ public class ByteArrayFileStream extends ByteArrayStream {
             FileInputStream fileInputStream = new FileInputStream(path);
             return createByteArrayFileStream(fileInputStream);
         } catch (Exception e) {
-            LOG.warning(StringHelper.getThrowableAsString(e));
+            logger.warn("warning", e);
             return null;
         }
     }
@@ -84,6 +82,7 @@ public class ByteArrayFileStream extends ByteArrayStream {
                 System.arraycopy(bytes, 0, this.bytes, bufferSize - readBytes, readBytes);
                 offset -= readBytes;
             } catch (IOException e) {
+                logger.warn("warning", e);
                 throw new RuntimeException(e);
             }
         }
@@ -93,10 +92,9 @@ public class ByteArrayFileStream extends ByteArrayStream {
     public void close() {
         super.close();
         try {
-            if (fileChannel == null) return;
-            fileChannel.close();
+            if (fileChannel != null) fileChannel.close();
         } catch (IOException e) {
-            LOG.warning(StringHelper.getThrowableAsString(e));
+            logger.warn("warning", e);
         }
     }
 }

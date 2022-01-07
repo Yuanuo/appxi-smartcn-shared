@@ -9,14 +9,12 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
-package org.appxi.hanlp.util.bytes;
-
-import org.appxi.util.StringHelper;
+package org.appxi.smartcn.util.bytes;
 
 import java.io.IOException;
 import java.io.InputStream;
 
-import static org.appxi.hanlp.util.HanlpHelper.LOG;
+import static org.appxi.smartcn.util.SmartCNHelper.logger;
 
 /**
  * @author hankcs
@@ -77,13 +75,10 @@ public class ByteArrayOtherStream extends ByteArrayStream {
     @Override
     public void close() {
         super.close();
-        if (is == null) {
-            return;
-        }
         try {
-            is.close();
+            if (null != is) is.close();
         } catch (IOException e) {
-            LOG.warning(StringHelper.getThrowableAsString(e));
+            logger.warn("warning", e);
         }
     }
 }

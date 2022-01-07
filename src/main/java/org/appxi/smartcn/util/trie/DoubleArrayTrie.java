@@ -13,10 +13,10 @@
  * License (the "BSD").
  * </p>
  */
-package org.appxi.hanlp.util.trie;
+package org.appxi.smartcn.util.trie;
 
-import org.appxi.hanlp.util.bytes.ByteArray;
-import org.appxi.hanlp.util.bytes.ByteHelper;
+import org.appxi.smartcn.util.bytes.ByteArray;
+import org.appxi.smartcn.util.bytes.ByteHelper;
 import org.appxi.util.FileHelper;
 
 import java.io.*;

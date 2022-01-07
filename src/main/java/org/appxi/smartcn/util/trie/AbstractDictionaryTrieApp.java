@@ -1,6 +1,6 @@
-package org.appxi.hanlp.util.trie;
+package org.appxi.smartcn.util.trie;
 
-import org.appxi.hanlp.util.HanlpHelper;
+import org.appxi.smartcn.util.SmartCNHelper;
 
 public abstract class AbstractDictionaryTrieApp<V> {
     private final Object syncLock = new Object();
@@ -14,7 +14,7 @@ public abstract class AbstractDictionaryTrieApp<V> {
                 return trie;
             final long st = System.currentTimeMillis();
             loadDictionaries(trie = new DoubleArrayTrieByAhoCorasick<>());
-            HanlpHelper.LOG.info("getDictionaryTrie used times: " + (System.currentTimeMillis() - st));
+            SmartCNHelper.logger.info("getDictionaryTrie used after: " + (System.currentTimeMillis() - st));
         }
         return trie;
     }

@@ -9,10 +9,10 @@
  * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
  * </copyright>
  */
-package org.appxi.hanlp.util.trie;
+package org.appxi.smartcn.util.trie;
 
-import org.appxi.hanlp.util.RawArray;
-import org.appxi.hanlp.util.bytes.ByteArray;
+import org.appxi.smartcn.util.bytes.ByteArray;
+import org.appxi.smartcn.util.RawArray;
 
 import java.io.DataOutputStream;
 import java.io.IOException;

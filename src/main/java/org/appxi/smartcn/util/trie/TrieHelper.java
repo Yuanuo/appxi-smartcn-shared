@@ -1,8 +1,8 @@
-package org.appxi.hanlp.util.trie;
+package org.appxi.smartcn.util.trie;
 
-import org.appxi.hanlp.util.HanlpHelper;
-import org.appxi.hanlp.util.bytes.ByteArray;
-import org.appxi.hanlp.util.bytes.BytesHelper;
+import org.appxi.smartcn.util.bytes.ByteArray;
+import org.appxi.smartcn.util.bytes.BytesHelper;
+import org.appxi.smartcn.util.SmartCNHelper;
 import org.appxi.util.FileHelper;
 
 import java.io.BufferedOutputStream;
@@ -22,7 +22,7 @@ public interface TrieHelper {
                 return true;
             }
         } finally {
-            HanlpHelper.LOG.info("loadBin used times: " + (System.currentTimeMillis() - st));
+            SmartCNHelper.logger.info("loadBin used after: " + (System.currentTimeMillis() - st));
         }
         return false;
     }
@@ -45,7 +45,7 @@ public interface TrieHelper {
                 e.printStackTrace();
             }
         }
-        HanlpHelper.LOG.info("saveBin used times: " + (System.currentTimeMillis() - st));
+        SmartCNHelper.logger.info("saveBin used after: " + (System.currentTimeMillis() - st));
         return false;
     }
 }

@@ -1,10 +1,9 @@
-module appxi.hanlp.shared {
-    requires java.logging;
-    requires appxi.shared;
+module appxi.smartcn.shared {
+    requires transitive appxi.shared;
 
-    exports org.appxi.hanlp.chars;
-    exports org.appxi.hanlp.util;
-    exports org.appxi.hanlp.util.bytes;
-    exports org.appxi.hanlp.util.dictionary;
-    exports org.appxi.hanlp.util.trie;
+    exports org.appxi.smartcn.chars;
+    exports org.appxi.smartcn.util;
+    exports org.appxi.smartcn.util.bytes;
+    exports org.appxi.smartcn.util.dictionary;
+    exports org.appxi.smartcn.util.trie;
 }

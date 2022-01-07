@@ -1,14 +1,16 @@
-package org.appxi.hanlp.chars;
+package org.appxi.smartcn.chars;
 
-import org.appxi.hanlp.util.HanlpHelper;
+import org.appxi.smartcn.util.SmartCNHelper;
 import org.appxi.util.FileHelper;
 
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.nio.file.Path;
 
-public class StandardChars {
-    private static final String pathTxt = "/appxi/hanlpChars/data.txt";
-    private static final String pathBin = pathTxt.replace(".txt", ".bin").substring(1);
+import static org.appxi.smartcn.util.SmartCNHelper.logger;
 
+public class StandardChars {
     private static char[] CHARS;
 
     static {
@@ -19,37 +21,37 @@ public class StandardChars {
         final long st = System.currentTimeMillis();
         char[] data = null;
         try {
-            final Path fileBin = HanlpHelper.resolveCache(pathBin);
-            if (FileHelper.exists(fileBin)) {
+            final Path fileBin = SmartCNHelper.resolveCache("chars/data.bin");
+            if (Files.exists(fileBin)) {
                 try {
                     data = FileHelper.readObject(fileBin);
-                } catch (Exception ignore) {
-                    FileHelper.delete(fileBin);
+                } catch (Throwable ignore) {
+                    try {
+                        Files.deleteIfExists(fileBin);
+                    } catch (IOException ignored) {
+                    }
                 }
             }
             if (null == data) {
-                data = new char[Character.MAX_VALUE + 1];
+                data = new char[Character.MAX_VALUE];
                 for (int i = 0; i < data.length; i++) {
                     data[i] = (char) i;
+                    if (Character.isWhitespace(i) || Character.isSpaceChar(i)) {
+                        data[i] = ' ';
+                    }
                 }
                 final char[] finalMappings = data;
-                FileHelper.lines(StandardChars.class.getResourceAsStream(pathTxt), line -> {
-                    if (line.length() == 3)
+                FileHelper.lines(StandardChars.class.getResourceAsStream("data.txt"), StandardCharsets.UTF_8, line -> {
+                    if (line.length() >= 3)
                         finalMappings[line.charAt(0)] = finalMappings[line.charAt(2)];
                     return false; // don't break
                 });
-                // loadSpace
-                for (int i = Character.MIN_CODE_POINT; i <= Character.MAX_CODE_POINT; i++) {
-                    if (Character.isWhitespace(i) || Character.isSpaceChar(i)) {
-                        finalMappings[i] = ' ';
-                    }
-                }
-                HanlpHelper.LOG.info("caching chars to:" + fileBin);
+                logger.info("caching standard-chars to:" + fileBin);
                 FileHelper.writeObject(finalMappings, fileBin);
             }
         } finally {
             CHARS = data;
-            HanlpHelper.LOG.info("standard chars loaded in " + (System.currentTimeMillis() - st) + " ms");
+            logger.info("standard-chars loaded in " + (System.currentTimeMillis() - st) + " ms");
         }
     }
 

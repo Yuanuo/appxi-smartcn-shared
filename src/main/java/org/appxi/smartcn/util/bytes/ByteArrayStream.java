@@ -9,7 +9,7 @@
  * This source is subject to Hankcs. Please contact Hankcs to get more information.
  * </copyright>
  */
-package org.appxi.hanlp.util.bytes;
+package org.appxi.smartcn.util.bytes;
 
 /**
  * @author hankcs

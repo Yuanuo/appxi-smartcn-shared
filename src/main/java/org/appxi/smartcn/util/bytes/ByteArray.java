@@ -1,17 +1,6 @@
-/*
- * <summary></summary>
- * <author>He Han</author>
- * <email>hankcs.cn@gmail.com</email>
- * <create-date>2014/10/30 14:33</create-date>
- *
- * <copyright file="ByteArray.java" company="上海林原信息科技有限公司">
- * Copyright (c) 2003-2014, 上海林原信息科技有限公司. All Right Reserved, http://www.linrunsoft.com/
- * This source is subject to the LinrunSpace License. Please contact 上海林原信息科技有限公司 to get more information.
- * </copyright>
- */
-package org.appxi.hanlp.util.bytes;
+package org.appxi.smartcn.util.bytes;
 
-import static org.appxi.hanlp.util.HanlpHelper.LOG;
+import static org.appxi.smartcn.util.SmartCNHelper.logger;
 
 /**
  * 对字节数组进行封装，提供方便的读取操作
@@ -186,10 +175,10 @@ public class ByteArray {
                     /* 110x xxxx   10xx xxxx*/
                     count += 2;
                     if (count > utflen)
-                        LOG.severe("malformed input: partial character at end");
+                        logger.error("malformed input: partial character at end");
                     char2 = bytearr[count - 1];
                     if ((char2 & 0xC0) != 0x80)
-                        LOG.severe("malformed input around byte " + count);
+                        logger.error("malformed input around byte " + count);
                     chararr[chararr_count++] = (char) (((c & 0x1F) << 6) |
                             (char2 & 0x3F));
                     break;
@@ -197,18 +186,18 @@ public class ByteArray {
                     /* 1110 xxxx  10xx xxxx  10xx xxxx */
                     count += 3;
                     if (count > utflen)
-                        LOG.severe("malformed input: partial character at end");
+                        logger.error("malformed input: partial character at end");
                     char2 = bytearr[count - 2];
                     char3 = bytearr[count - 1];
                     if (((char2 & 0xC0) != 0x80) || ((char3 & 0xC0) != 0x80))
-                        LOG.severe("malformed input around byte " + (count - 1));
+                        logger.error("malformed input around byte " + (count - 1));
                     chararr[chararr_count++] = (char) (((c & 0x0F) << 12) |
                             ((char2 & 0x3F) << 6) |
                             ((char3 & 0x3F) << 0));
                     break;
                 default:
                     /* 10xx xxxx,  1111 xxxx */
-                    LOG.severe("malformed input around byte " + count);
+                    logger.error("malformed input around byte " + count);
             }
         }
         // The number of chars produced may be less than utflen
