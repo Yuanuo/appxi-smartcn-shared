@@ -21,13 +21,13 @@ public class StandardChars {
         final long st = System.currentTimeMillis();
         char[] data = null;
         try {
-            final Path fileBin = SmartCNHelper.resolveCache("chars/data.bin");
-            if (Files.exists(fileBin)) {
+            final Path binFile = SmartCNHelper.resolveCache("chars/data.bin");
+            if (Files.exists(binFile)) {
                 try {
-                    data = FileHelper.readObject(fileBin);
+                    data = FileHelper.readObject(binFile);
                 } catch (Throwable ignore) {
                     try {
-                        Files.deleteIfExists(fileBin);
+                        Files.deleteIfExists(binFile);
                     } catch (IOException ignored) {
                     }
                 }
@@ -46,8 +46,8 @@ public class StandardChars {
                         finalMappings[line.charAt(0)] = finalMappings[line.charAt(2)];
                     return false; // don't break
                 });
-                logger.info("caching standard-chars to:" + fileBin);
-                FileHelper.writeObject(finalMappings, fileBin);
+                logger.info("caching standard-chars to:" + binFile);
+                FileHelper.writeObject(finalMappings, binFile);
             }
         } finally {
             CHARS = data;
@@ -78,14 +78,14 @@ public class StandardChars {
         return new String(convert(string.toCharArray()));
     }
 
-    public static void convertTo(String string, char[] result) {
+    public static void convertInto(String string, char[] result) {
         final char[] chars = string.toCharArray();
         for (int i = 0; i < chars.length; i++) {
             result[i] = CHARS[chars[i]];
         }
     }
 
-    public static void convertMe(char[] chars) {
+    public static void convertThis(char[] chars) {
         for (int i = 0; i < chars.length; i++) {
             chars[i] = CHARS[chars[i]];
         }
