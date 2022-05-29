@@ -13,7 +13,9 @@ public abstract class AbstractDictionaryTrieApp<V> {
             if (null != trie)
                 return trie;
             final long st = System.currentTimeMillis();
-            loadDictionaries(trie = new DoubleArrayTrieByAhoCorasick<>());
+            final DoubleArrayTrieByAhoCorasick<V> dataTrie = new DoubleArrayTrieByAhoCorasick<>();
+            loadDictionaries(dataTrie);
+            this.trie = dataTrie;
             SmartCNHelper.logger.info("getDictionaryTrie used after: " + (System.currentTimeMillis() - st));
         }
         return trie;
