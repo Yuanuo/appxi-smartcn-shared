@@ -104,7 +104,6 @@ public class StandardChars {
                 FileHelper.lines(inputStream, StandardCharsets.UTF_8, line -> {
                     if (line.length() >= 3)
                         data[line.charAt(0)] = data[line.charAt(2)];
-                    return false; // don't break
                 });
             } catch (Exception e) {
                 logger.warn(sourcePath, e);
